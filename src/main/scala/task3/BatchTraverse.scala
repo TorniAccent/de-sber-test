@@ -1,3 +1,5 @@
+package task3
+
 import java.util.concurrent.Executors
 
 import scala.concurrent.duration.Duration
@@ -19,7 +21,10 @@ object BatchTraverse extends App {
     i * 100
   }
 
-  def batchTraverse(in: Seq[Int], size: Int)(f: Int => Future[Int]): Future[Seq[Int]] = ???
+  def batchTraverse(in: Seq[Int], size: Int)(f: Int => Future[Int]): Future[Seq[Int]] = {
+    val batch = in.take(size)
+    Future.traverse(batch)(f)
+  }
 
   val in = 1 to 12
   val size = 4
