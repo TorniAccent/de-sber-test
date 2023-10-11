@@ -36,4 +36,11 @@ FROM (SELECT Id, Timestamp,
       FROM Some_dates)
 WHERE "Is_bacward_inserted" = 'Y';
 
+-- more elegant solution
+SELECT DISTINCT t1.id
+FROM some_dates AS t1
+         JOIN some_dates AS t2
+              ON t1.id > t2.id
+                  AND t1.timestamp < t2.timestamp;
+
 -- DROP TABLE Some_dates;
