@@ -60,4 +60,6 @@ object CallCenterCallsProcessing extends App {
     .orderBy(desc("date"))
   stat_oper.show()
 
+  dates.filter("false").show()
+
 }
