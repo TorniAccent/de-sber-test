@@ -53,4 +53,11 @@ object CallCenterCallsProcessing extends App {
     .orderBy(desc("date"))
   stat_total.show()
 
+  val stat_oper = dates
+    .join(calls, dates("date") === calls("date").alias("dates_countable"), "inner")
+    .groupBy(dates("date"), calls("oper_id")).agg(count(calls("date")).alias("count"))
+    .select(col("date"), col("oper_id"), col("count"), current_timestamp().alias("stat_date_time"))
+    .orderBy(desc("date"))
+  stat_oper.show()
+
 }
