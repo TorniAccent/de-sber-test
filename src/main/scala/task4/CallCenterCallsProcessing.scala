@@ -60,6 +60,9 @@ object CallCenterCallsProcessing extends App {
     .orderBy(desc("date"))
   stat_oper.show()
 
-  dates.filter("false").show()
+  val modifiedDates = dates.limit(0)
+  modifiedDates.show()
+
+  // write all the aggregated data
 
 }
