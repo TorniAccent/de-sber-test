@@ -1,6 +1,6 @@
 package task4
 
-import org.apache.spark.sql.functions.{col, count, current_timestamp}
+import org.apache.spark.sql.functions.{col, count, current_timestamp, desc}
 import org.apache.spark.sql.{Row, SparkSession}
 import org.apache.spark.sql.types.{IntegerType, StringType, StructType}
 
@@ -50,6 +50,7 @@ object CallCenterCallsProcessing extends App {
     .join(calls, dates("date") === calls("date").alias("dates_countable"), "left")
     .groupBy(dates("date")).agg(count(calls("date")).alias("count"))
     .select(col("date"), col("count"), current_timestamp().alias("stat_date_time"))
+    .orderBy(desc("date"))
   stat_total.show()
 
 }
